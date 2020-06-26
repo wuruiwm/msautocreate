@@ -65,7 +65,9 @@ if($_GET['a'] == 'invitation_code_list'){
 	while($row = mysqli_fetch_assoc($result)){
 		$data[] = $row;
 	}
-    $token = get_ms_token($tenant_id,$client_id,$client_secret);
+    if(!empty(implode(',',array_column($data,'email')))){
+        $token = get_ms_token($tenant_id,$client_id,$client_secret);
+    }
 	foreach($data as $k =>$v){
 		$data[$k]['create_time'] = date('Y-m-d H:i:s',$v['create_time']);
 		$data[$k]['update_time'] = date('Y-m-d H:i:s',$v['update_time']);

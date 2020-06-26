@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/x-icon" href="https://blobs.officehome.msocdn.com/images/content/images/favicon-8f211ea639.ico" />
-    <title>Office 365</title>
+    <title><?php echo $page_config['title'];?></title>
+    <link rel="stylesheet" href="https://cdn.nikm.cn/css/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/css/mdui.min.css">
     <style>
         @media screen and (max-width:600px){.mdui-toolbar>img{margin:auto}.hero>.mdui-typo-display-3{font-size:27px}.hero>.mdui-typo-title-opacity{font-size:15px}.enroll{padding:40px 15px!important}.email{display:block!important}}@media screen and (min-width:600px){.enroll{padding:50px 40px!important}}.enroll-mdui-dialog{max-width:inherit;overflow-x:hidden;overflow-y:scroll}.hero-bg{background:url(https://i.loli.net/2020/01/25/KEScJXCBfAzaIjW.png) no-repeat;background-size:cover;height:100vh;overflow:scroll}.hero-btn{width:120px;height:45px}.enroll{background-color:#fff;position:absolute;color:#000;padding:60px 60px 100px 60px;display:none}.code,.email{display:flex;align-items:flex-end;justify-content:space-between}
@@ -28,7 +29,7 @@
         <span class="mdui-typo-display-1 mdui-hidden-xs">|</span>
         <span class="mdui-typo-title mdui-hidden-xs">Office</span>
         <div class="mdui-toolbar-spacer mdui-hidden-xs"></div>
-        <a class="mdui-typo-title mdui-hidden-xs" href="https://github.com/zayabighead/msautocreate"><i class="mdui-icon material-icons">account_circle</i></a>
+        <a class="mdui-typo-title mdui-hidden-xs" href="https://github.com/wuruiwm/msautocreate"><i class="fa fa-github fa-6" aria-hidden="true"></i></a>
     </div>
 </div>
 
@@ -38,7 +39,7 @@
         <div class="mdui-center mdui-typo-display-3"><?php echo $page_config['title'];?></div>
         <div class="mdui-typo-title-opacity"><?php echo $page_config['line1'];?></div>
         <br>
-        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red mdui-m-a-1 hero-btn" id="getOffice">获取 Office</button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red mdui-m-a-1 hero-btn" id="getOffice">获取账号</button>
         <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-white mdui-m-a-1 hero-btn" onclick="window.location.href='https://office.com/login'">登录</button>
     </div>
 
