@@ -1,179 +1,179 @@
 <!DOCTYPE html>
-<html lang="">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $page_config['title']; ?></title>
-    <link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/mdui/0.4.3/css/mdui.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.css">
-    <link href="https://i.loli.net/2020/01/25/mHyKw936UxpEM1Y.png" rel="icon" type="image/png">
+    <link rel="shortcut icon" type="image/x-icon" href="https://blobs.officehome.msocdn.com/images/content/images/favicon-8f211ea639.ico" />
+    <title>Office 365</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/css/mdui.min.css">
     <style>
-        .intro {
-            background: url('https://i.loli.net/2020/01/25/KEScJXCBfAzaIjW.png') no-repeat;
-            background-size: cover
-        }
-
-        .create-wait {
-            display: none;
-            position: absolute;
-            z-index: 999;
-            width: 100%;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            top: 0
-        }
-
-        .create-wait .mdui-valign {
-            width: 100%;
-            height: 100vh;
-        }
-
-        @media screen and (max-width: 600px) {
-            .screen {
-                display: none
-            }
-
-            .mdui-toolbar>img {
-                margin: auto
-            }
-
-            .hero>.mdui-typo-display-3 {
-                font-size: 27px
-            }
-
-            .hero>.mdui-typo-title-opacity {
-                font-size: 15px
-            }
-        }
-
+        @media screen and (max-width:600px){.mdui-toolbar>img{margin:auto}.hero>.mdui-typo-display-3{font-size:27px}.hero>.mdui-typo-title-opacity{font-size:15px}.enroll{padding:40px 15px!important}.email{display:block!important}}@media screen and (min-width:600px){.enroll{padding:50px 40px!important}}.enroll-mdui-dialog{max-width:inherit;overflow-x:hidden;overflow-y:scroll}.hero-bg{background:url(https://i.loli.net/2020/01/25/KEScJXCBfAzaIjW.png) no-repeat;background-size:cover;height:100vh;overflow:scroll}.hero-btn{width:120px;height:45px}.enroll{background-color:#fff;position:absolute;color:#000;padding:60px 60px 100px 60px;display:none}.code,.email{display:flex;align-items:flex-end;justify-content:space-between}
     </style>
 </head>
 
 <body>
 
+<div class="mdui-dialog" id="msg">
+    <div class="mdui-dialog-title">创建失败...</div>
+    <div class="mdui-dialog-content">激活码无效！</div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>我知道了</button>
+    </div>
+</div>
 
-    <div id="fullpage">
+<div class="mdui-appbar">
+    <div class="mdui-toolbar" style="width: 85%; margin: auto">
+        <img class="mdui-img-fluid" src="https://i.loli.net/2020/04/21/ST9ru5mwVqUXnKO.png" alt="">
+        <span class="mdui-typo-display-1 mdui-hidden-xs">|</span>
+        <span class="mdui-typo-title mdui-hidden-xs">Office</span>
+        <div class="mdui-toolbar-spacer mdui-hidden-xs"></div>
+        <a class="mdui-typo-title mdui-hidden-xs" href="https://github.com/zayabighead/msautocreate"><i class="mdui-icon material-icons">account_circle</i></a>
+    </div>
+</div>
 
-        <div class="section intro">
+<div class="hero-bg mdui-typo mdui-text-color-white-text mdui-valign">
 
-            <div class="mdui-appbar mdui-appbar-fixed mdui-color-white">
-                <div class="mdui-toolbar" style="width: 85%; margin: auto">
-                    <img class="mdui-img-fluid" src="https://i.loli.net/2020/04/21/ST9ru5mwVqUXnKO.png" alt="">
-                    <span class="mdui-typo-display-1 screen">|</span>
-                    <span class="mdui-typo-title screen">Office</span>
-                    <div class="mdui-toolbar-spacer screen"></div>
+    <div class="hero mdui-col-xs-10 mdui-col-offset-xs-1 mdui-text-center">
+        <div class="mdui-center mdui-typo-display-3"><?php echo $page_config['title'];?></div>
+        <div class="mdui-typo-title-opacity"><?php echo $page_config['line1'];?></div>
+        <br>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red mdui-m-a-1 hero-btn" id="getOffice">获取 Office</button>
+        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-white mdui-m-a-1 hero-btn" onclick="window.location.href='https://office.com/login'">登录</button>
+    </div>
+
+    <div class="enroll-mdui-dialog mdui-dialog enroll mdui-col-xs-10 mdui-col-offset-xs-1 mdui-col-md-8 mdui-col-offset-md-2 mdui-shadow-8" id="enroll">
+        <div class="mdui-typo-title">获取账号</div>
+        <hr><br>
+
+        <form>
+
+            <div class="mdui-col-md-6 mdui-col-offset-md-3 mdui-col-xs-12" style="display: none" id="createdAccount">
+                <div class="mdui-textfield">
+                    <i class="mdui-icon material-icons mdui-text-color-pink">email</i>
+                    <p>邮箱：</p>
+                    <input class="mdui-textfield-input" type="email" value="" id="email">
                 </div>
-            </div>
-
-            <div class="mdui-text-color-white-text" align="center" style="width: 70%;margin: auto">
-                <h1 style="font-size: 40px;font-weight: 500"><?php echo $page_config['title']; ?></h1>
-                <h1 style="font-size: 40px;font-weight: 500"><?php echo $page_config['line1']; ?></h1>
-                <h1 style="font-size: 30px;font-weight: 500"><?php echo $page_config['line2']; ?></h1>
-                <h1 style="font-size: 30px;font-weight: 500"><?php echo $page_config['line3']; ?></h1>
-                <br><br><br><br>
-                <a href="#form"><button class="mdui-btn mdui-ripple mdui-color-red mdui-m-a-2" style="width: 140px;height: 50px">立即获取</button></a>
-                <a href="https://www.office.com/login"><button class="mdui-m-a-2 mdui-btn mdui-ripple mdui-color-white" style="width: 140px;height: 50px">登录</button></a>
-            </div>
-
-        </div>
-
-        <div class="section form">
-            <div class="create-wait">
-                <div class="mdui-valign">
-                    <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
+                <div class="mdui-textfield">
+                    <i class="mdui-icon material-icons mdui-text-color-pink">lock</i>
+                    <p>初始密码：</p>
+                    <input class="mdui-textfield-input" type="text" value="" id="password">
                 </div>
+                <br>
+                <br>
+                <a class="mdui-btn mdui-btn-raised mdui-ripple mdui-text-color-yellow mdui-color-pink" href="https://office.com/login" target="_blank" style="float: right">前往登录</a>
+                <div style="clear: both"></div>
             </div>
-            <div class="mdui-container">
-                <div class="mdui-row">
-                    <h2 style="font-size: 40px;font-weight: 500" id="aform">微软全局子号自助开通</h2>
 
-                    <form id="aform">
-                        <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">姓/Lastname *</label>
-                            <input class="mdui-textfield-input" type="text" name="lastname" pattern="[A-z0-9]{1,10}" required>
-                            <div class="mdui-textfield-error">英文/拼音</div>
-                        </div>
-                        <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">名/Firstname *</label>
-                            <input class="mdui-textfield-input" type="text" name="firstname" pattern="[A-z0-9]{1,10}" required>
-                            <div class="mdui-textfield-error">英文/拼音</div>
-                        </div>
-                        <div class="mdui-textfield mdui-textfield-floating-label">
-                            <label class="mdui-textfield-label">邮箱前缀 *</label>
-                            <input class="mdui-textfield-input" type="text" name="username" pattern="[A-z0-9]{1,50}" required>
-                            <div class="mdui-textfield-error">@ 前面的字符，允许字母/数字</div>
-                        </div>
-                        <input type="submit" class="mdui-btn mdui-ripple mdui-color-yellow" value="提交">
-                        <div style="margin-top: 20px; color: gray">* 提交后账户信息将显示在网页上，请勿刷新</div>
-                    </form>
+            <div class="mdui-progress" style="display: none">
+                <div class="mdui-progress-indeterminate"></div>
+            </div>
 
-                    <div class="ainfo" style="display: none">
-                        <h2 style="font-size: 30px;font-weight: 500">微软全局子号创建成功！</h2>
-                        <label class="mdui-textfield-label">邮箱</label>
-                        <input class="mdui-textfield-input cremail" type="text" value="">
-                        <label class="mdui-textfield-label">初始密码</label>
-                        <input class="mdui-textfield-input crpass" type="text" value="">
-                        <a href="https://www.office.com/login" target="_blank"><button class="mdui-m-t-4 mdui-btn mdui-ripple mdui-color-red" style="width: 140px;height: 50px">前往登录</button></a>
+            <div class="mdui-col-xs-12 mdui-col-md-6" id="accountInfo">
+                <div class="mdui-typo-subheading">账号信息：</div>
+                <br>
+                <div class="mdui-col-xs-12">
+                    <span>订阅：</span>
+                    <select class="mdui-select" name="sku_id" mdui-select id="sku_id">
+                        <?php foreach($sku_id as $k => $v){ ?>
+                        <option value="<?php echo $v['sku_id'];?>"><?php echo $v['title'];?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12">
+                    <label class="mdui-textfield-label">姓名</label>
+                    <input class="mdui-textfield-input" type="text" maxlength="20" required id="display_name" name="display_name">
+                    <div class="mdui-textfield-error">用户名仅限中文/英文/数字</div>
+                    <div class="mdui-textfield-helper">账号展示的姓名</div>
+                </div>
+                <div class="email mdui-col-xs-12">
+                    <div class="mdui-textfield mdui-textfield-floating-label" style="width: 100%">
+                        <label class="mdui-textfield-label">用户名</label>
+                        <input class="mdui-textfield-input" type="text" maxlength="20" required id="user_name" name="user_name" pattern="^[A-Za-z0-9]+$">
+                        <div class="mdui-textfield-error">邮箱前缀仅限英文/数字</div>
+                        <div class="mdui-textfield-helper">邮箱 @ 前面的字符</div>
                     </div>
+                    <span class="mdui-hidden-xs">&nbsp;&nbsp;&nbsp;</span>
+                    <select class="mdui-select" mdui-select style="margin-bottom: 28px; color: black" name="domain" id="domain">
+                        <?php foreach($domain as $k => $v){ ?>
+                        <option value="<?php echo $v;?>">@ <?php echo $v;?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div style="clear: both"></div>
+                <br>
+                <br>
+            </div>
 
+            <div class="mdui-col-xs-12 mdui-col-md-5 mdui-col-offset-md-1" id="activation">
+                <div class="mdui-typo-subheading">激活信息：</div>
+
+                <div class="mdui-col-xs-12 code">
+                    <div class="mdui-textfield mdui-textfield-floating-label" style="width: 100%">
+                        <label class="mdui-textfield-label">激活码</label>
+                        <input class="mdui-textfield-input" type="text" required id="invitation_code" name="code">
+                        <div class="mdui-textfield-error">必填</div>
+                    </div>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <button class="mdui-btn mdui-color-pink mdui-ripple" style="margin-bottom: 28px; padding: 0" onclick="window.open('<?php echo $invitation_code_buy_link;?>')">获取激活码</button>
+                </div>
+
+                <div class="mdui-col-xs-12">
+                    <br>
+                    <br>
+                    <input type="submit" class="mdui-col-xs-12 mdui-btn mdui-ripple mdui-color-pink hero-button" style="float: right" id="submit">
                 </div>
             </div>
-        </div>
+
+        </form>
 
     </div>
 
+</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.loli.net/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/vendors/scrolloverflow.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/3.0.8/fullpage.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#fullpage').fullpage({
-                anchors: ['intro', 'form'],
-                scrollOverflow: true,
-                verticalCentered: true
-            });
-        });
-
-    </script>
-    <script>
-        $('form').submit(function(e) {
-            e.preventDefault();
-            mdui.dialog({
-                title: '创建账号',
-                content: '点击确认后开始创建账号，请耐心等待，勿刷新网页',
-                buttons: [{
-                    text: '取消'
-                }, {
-                    text: '确认',
-                    onClick: function(inst) {
-                        $('.create-wait').show();
-                        var data = {
-                            lastname:e.target['lastname'].value.trim(),
-                            firstname:e.target['firstname'].value.trim(),
-                            username:e.target['username'].value.trim(),
-                        };
-                        $.post('',data,function(res){
-                            $('.create-wait').hide();
-                            if(res.code == 0){
-                                console.log(res.data);
-                                $('.cremail').val(res.data.email);
-                                $('.crpass').val(res.data.password);
-                                $('form').hide();
-                                $('.mdui-row>h2').hide();
-                                $('.ainfo').show();
-                            }else{
-                                mdui.alert(res.msg);
-                            }
-                        },'json');
-                    }
-                }]
-            });
-        });
-
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>
+<script src="https://cdn.nikm.cn/js/jquery.js"></script>
+<script>
+    var enroll = new mdui.Dialog("#enroll", {
+        modal: !0
+    });
+    $("#getOffice").on("click", function(e) {
+        enroll.open()
+    });
+    $("form").on("submit", function(e){
+        e.preventDefault();
+        var data = {
+            sku_id: $("#sku_id").val(),
+            display_name: $("#display_name").val().trim(),
+            user_name: $("#user_name").val().trim(),
+            domain: $("#domain").val(),
+            invitation_code: $("#invitation_code").val().trim(),
+        };
+        $("#accountInfo, #activation").hide();
+        $(".mdui-progress").show();
+        $(".enroll").height("auto");
+        $("hr").hide();
+        mdui.mutation();
+        $.post('',data,function(res){
+            $(".mdui-progress").hide();
+            $("hr").show();
+            if(res.code == 0){
+                $("#createdAccount").show();
+                $("#email").val(res.data.email);
+                $("#password").val(res.data.password);
+            }else if(res.code == 1){
+                $("#accountInfo, #activation").show();
+                enroll.close();
+                $('#msg>.mdui-dialog-content').html(res.msg);
+                new mdui.Dialog("#msg").open();
+            }
+            $("#display_name").val("");
+            $("#user_name").val("");
+            $("#invitation_code").val("");
+            $(".enroll").height("auto");
+        },'json');
+    });
+</script>
 </body>
 
 </html>
