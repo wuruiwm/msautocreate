@@ -104,6 +104,13 @@
                             <input class="mdui-textfield-input" type="text" name="username" pattern="[A-z0-9]{1,50}" required>
                             <div class="mdui-textfield-error">@ 前面的字符，允许字母/数字</div>
                         </div>
+                        <?php if($is_invitation_code){ ?>
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <label class="mdui-textfield-label">邀请码</label>
+                            <input class="mdui-textfield-input" type="text" name="invitation_code" pattern="[0-9]{1,50}" required id="invitation_code">
+                            <div class="mdui-textfield-error">请输入邀请码</div>
+                        </div>
+                        <?php }  ?>
                         <input type="submit" class="mdui-btn mdui-ripple mdui-color-yellow" value="提交">
                         <div style="margin-top: 20px; color: gray">* 提交后账户信息将显示在网页上，请勿刷新</div>
                     </form>
@@ -154,6 +161,7 @@
                             lastname:e.target['lastname'].value.trim(),
                             firstname:e.target['firstname'].value.trim(),
                             username:e.target['username'].value.trim(),
+                            invitation_code:$('#invitation_code').val(),
                         };
                         $.post('',data,function(res){
                             $('.create-wait').hide();
