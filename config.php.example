@@ -5,7 +5,8 @@ return [
     'tenant_id'=>'',
     'client_secret'=>'',
     'domain'=>[
-        'onmicrosoft.com'
+        'onmicrosoft1.com',
+        'onmicrosoft2.com',
     ],
     'sku_id'=>[
         [
