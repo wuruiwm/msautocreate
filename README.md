@@ -9,3 +9,6 @@
 然后重命名config.php.example为config.php 并修改配置  导入sql
 
 全局参数 获取可参考原作者github地址
+
+
+演示站https://ms.nikm.cn/
